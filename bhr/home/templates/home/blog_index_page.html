@@ -1,0 +1,11 @@
+<!-- blog_index_page.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>All Blogs</h1>
+<ul>
+    {% for blog in blogs %}
+        <li><a href="{{ blog.url }}">{{ blog.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

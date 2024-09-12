@@ -1,0 +1,8 @@
+<div class="quote-block">
+    <blockquote>
+        <p>{{ self.quote|linebreaks }}</p>
+        {% if self.author %}
+            <footer>— {{ self.author }}</footer>
+        {% endif %}
+    </blockquote>
+</div>
