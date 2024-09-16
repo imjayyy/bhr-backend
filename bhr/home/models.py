@@ -66,24 +66,6 @@ class HomePage(Page):
     ]
 
 
-
-
-
-
-# class BlogIndexPage(Page):
-#     # Add any fields if necessary
-
-#     subpage_types = ['BlogPage']
-
-#     def get_context(self, request):
-#         # Update context to include only published blog pages, ordered by date
-#         context = super().get_context(request)
-#         # context['blogs'] = BlogPage.objects.live().public().order_by('-first_published_at')
-#         context['blogs'] = BlogPage.objects.live().descendant_of(self).order_by('-first_published_at')
-
-#         return context
-
-
 class PostPage(Page):
 
     tags = ClusterTaggableManager(through=PostPageTag, blank=True)

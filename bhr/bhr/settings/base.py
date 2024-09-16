@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "wagtail.contrib.settings",
+    'bhr',
     "base",
+    "customauth",
     'rest_framework',
     'djoser',
     'django_filters',
@@ -197,5 +199,15 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+   'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+
+AUTH_USER_MODEL = 'customauth.CustomUserModel'
+
+DJOSER = {
+    'SERIALIZERS': {
+            'user_create': 'customauth.serializers.UserRegistrationSerializer'
+        },
+    'LOGIN_FIELD': 'email',
 }

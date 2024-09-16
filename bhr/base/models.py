@@ -37,6 +37,8 @@ from wagtail.contrib.settings.models import (
 # import register_snippet:
 from wagtail.snippets.models import register_snippet
 
+
+
 @register_setting
 class NavigationSettings(BaseGenericSetting):
     twitter_url = models.URLField(verbose_name="Twitter URL", blank=True)
@@ -111,3 +113,5 @@ class PostType(
         return self.name
     
 register_snippet(PostType)
+
+
