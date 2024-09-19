@@ -2,6 +2,7 @@ from django.db import models
 from django import forms
 from wagtail.models import Page
 from wagtail.fields import RichTextField
+from wagtail.images.blocks import ImageChooserBlock
 
 # import MultiFieldPanel:
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
@@ -21,6 +22,13 @@ class PostPageTag(TaggedItemBase):
 
 class HomePage(Page):
     # add the Hero section of HomePage:
+
+    parent_page_types = []  # This means it can't be a subpage of any other page
+
+    # Disable any child pages from being added under HomePage
+    subpage_types = []  # This means no subpages can be added under HomePage
+
+    
     image = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
@@ -68,9 +76,16 @@ class HomePage(Page):
 
 class PostPage(Page):
 
-    tags = ClusterTaggableManager(through=PostPageTag, blank=True)
-    
-    
+    tags = ClusterTaggableManager(through=PostPageTag, blank=True)    
+    thumbnail = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+
     body = StreamField(
         BlogStreamBlock(),
         blank=True,
@@ -89,6 +104,7 @@ class PostPage(Page):
     ]
 
     promote_panels = Page.promote_panels + [
+        FieldPanel('thumbnail'),
         FieldPanel('type'),
         FieldPanel('tags'),
     ]

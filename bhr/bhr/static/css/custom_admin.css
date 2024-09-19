@@ -1,0 +1,8 @@
+/* Hide Wagtail logo */
+.wagtail-logo {
+    display: none;
+}
+/* Replace other Wagtail branding */
+.sidebar__brand {
+    content: "BHR";
+}

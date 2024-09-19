@@ -4,10 +4,10 @@ from django.shortcuts import render
 # cmsapi/views.py
 from rest_framework import viewsets
 from wagtail.models import Page
-from base.models import PostType
+from base.models import PostType, Video
 
 from home.models import PostPage
-from .serializers import PageSerializer, PostPageSerializer, TypeSerializer
+from .serializers import PageSerializer, PostPageSerializer, TypeSerializer, VideoSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from django.http import HttpResponse
 from django.urls import get_resolver, URLPattern, URLResolver
@@ -49,7 +49,7 @@ def ApiDocView(request):
 
     response_content = f"<h1>{help_text}</h1><ul>"
     for url in urls:
-        if url.startswith('auth') or url.startswith('api'):
+        if url.startswith('auth') or url.startswith('api') or url.startswith('videos'):
             # url = clean_url(url)
             response_content += f"<a href={'http://' + request.get_host()+ '/' + url}><li>{url}</li> </a>"
     response_content += "</ul>"
@@ -76,3 +76,6 @@ class PostTypeViewSet(viewsets.ModelViewSet):
     serializer_class = TypeSerializer
 
 
+class VideoViewSet(viewsets.ModelViewSet):
+    queryset = Video.objects.all()
+    serializer_class = VideoSerializer

@@ -1,24 +1,13 @@
 from django.db import models
-from wagtail.admin.panels import (
-    FieldPanel,
-    MultiFieldPanel,
-)
 from wagtail.contrib.settings.models import (
     BaseGenericSetting,
     register_setting,
 )
-
-
-from django.db import models
 from wagtail.admin.panels import (
     FieldPanel,
     MultiFieldPanel,
-
-    # import PublishingPanel: 
     PublishingPanel,
 )
-
-# import RichTextField:
 from wagtail.fields import RichTextField
 
 # import DraftStateMixin, PreviewableMixin, RevisionMixin, TranslatableMixin:
@@ -29,15 +18,14 @@ from wagtail.models import (
     TranslatableMixin,
 )
 
-from wagtail.contrib.settings.models import (
-    BaseGenericSetting,
-    register_setting,
-)
-
 # import register_snippet:
 from wagtail.snippets.models import register_snippet
+from wagtail.models import Page, ClusterableModel
+from wagtail.admin.forms.models import WagtailAdminModelForm
 
-
+from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
 
 @register_setting
 class NavigationSettings(BaseGenericSetting):
@@ -113,5 +101,28 @@ class PostType(
         return self.name
     
 register_snippet(PostType)
+
+
+class VideoTag(TaggedItemBase):
+    content_object = ParentalKey('Video', on_delete=models.CASCADE, related_name='video_tagged_items')
+
+class Video(ClusterableModel, models.Model):
+    url = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    tags = ClusterTaggableManager(through=VideoTag, blank=True)
+
+    def __str__(self) -> str:
+        return self.title
+
+    # Add other fields as needed
+
+
+# class VideoForm(WagtailAdminModelForm):
+#     class Meta:
+#         model = Video
+
+
+
 
 

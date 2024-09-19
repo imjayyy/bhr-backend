@@ -171,7 +171,7 @@ STORAGES = {
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "bhr"
+WAGTAIL_SITE_NAME = "BHR"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
