@@ -44,33 +44,33 @@ class NavigationSettings(BaseGenericSetting):
         )
     ]
 
-@register_snippet
-class FooterText(
-    DraftStateMixin,
-    RevisionMixin,
-    PreviewableMixin,
-    TranslatableMixin,
-    models.Model,
-):
+# @register_snippet
+# class FooterText(
+#     DraftStateMixin,
+#     RevisionMixin,
+#     PreviewableMixin,
+#     TranslatableMixin,
+#     models.Model,
+# ):
 
-    body = RichTextField()
+#     body = RichTextField()
 
-    panels = [
-        FieldPanel("body"),
-        PublishingPanel(),
-    ]
+#     panels = [
+#         FieldPanel("body"),
+#         PublishingPanel(),
+#     ]
 
-    def __str__(self):
-        return "Footer text"
+#     def __str__(self):
+#         return "Footer text"
 
-    def get_preview_template(self, request, mode_name):
-        return "base.html"
+#     def get_preview_template(self, request, mode_name):
+#         return "base.html"
 
-    def get_preview_context(self, request, mode_name):
-        return {"footer_text": self.body}
+#     def get_preview_context(self, request, mode_name):
+#         return {"footer_text": self.body}
 
-    class Meta(TranslatableMixin.Meta):
-        verbose_name_plural = "Footer Text"
+#     class Meta(TranslatableMixin.Meta):
+#         verbose_name_plural = "Footer Text"
 
 
 class PostType(
