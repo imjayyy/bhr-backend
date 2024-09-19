@@ -67,7 +67,7 @@ class PostPageViewSet(viewsets.ModelViewSet):
     serializer_class = PostPageSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['type']  # Enable filtering by 'type'
-    queryset = PostPage.objects.all()
+    queryset = PostPage.objects.filter(live=True)
     serializer_class = PostPageSerializer
 
 

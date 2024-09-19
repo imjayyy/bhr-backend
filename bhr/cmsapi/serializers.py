@@ -44,7 +44,7 @@ class PostPageSerializer(TaggitSerializer, serializers.ModelSerializer):
     thumbnail = ImageSerializer()
     class Meta:
         model = PostPage
-        fields = ['id', 'title', 'slug', 'type', 'tags', 'url','thumbnail']  # Add any additional fields if necessary
+        fields = ['id', 'title', 'slug', 'type', 'tags', 'url','thumbnail', 'search_description', "live"]   # Add any additional fields if necessary
     
 class VideoSerializer(serializers.ModelSerializer):
     
