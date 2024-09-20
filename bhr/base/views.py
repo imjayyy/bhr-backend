@@ -5,7 +5,7 @@ from wagtail.admin.viewsets.model import ModelViewSet
 # Create your views here.
 class VideoViewSet(ModelViewSet):
     model = Video   
-    form_fields = ["url", "title", "description"]
+    form_fields = ["url", "title", "thumbnail", "description"]
 
     icon = "media"
     add_to_admin_menu = True

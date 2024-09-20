@@ -29,7 +29,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         # Get the rendition with the desired size
-        rendition = obj.get_rendition('fill-200x200')
+        rendition = obj.get_rendition('fill-80x80')
         return rendition.url  # Return only the URL of the rendition
 
 class PageSerializer(serializers.ModelSerializer):
@@ -46,9 +46,11 @@ class PostPageSerializer(TaggitSerializer, serializers.ModelSerializer):
         model = PostPage
         fields = ['id', 'title', 'slug', 'type', 'tags', 'url','thumbnail', 'search_description', "live"]   # Add any additional fields if necessary
     
-class VideoSerializer(serializers.ModelSerializer):
-    
+class VideoSerializer(TaggitSerializer, serializers.ModelSerializer):
+    tags = TagListSerializerField(required=False)
+    thumbnail = ImageSerializer()
+
     class Meta:
         model = Video
-        fields = ['id', 'title', 'url', 'description']  # Add any additional fields if necessary
+        fields = ['id', 'title', 'url', 'description','thumbnail', 'tags']  # Add any additional fields if necessary
     

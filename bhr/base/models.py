@@ -7,7 +7,9 @@ from wagtail.admin.panels import (
     FieldPanel,
     MultiFieldPanel,
     PublishingPanel,
+    
 )
+
 from wagtail.fields import RichTextField
 
 # import DraftStateMixin, PreviewableMixin, RevisionMixin, TranslatableMixin:
@@ -17,6 +19,8 @@ from wagtail.models import (
     RevisionMixin,
     TranslatableMixin,
 )
+
+from wagtail.images.models import Image
 
 # import register_snippet:
 from wagtail.snippets.models import register_snippet
@@ -111,7 +115,21 @@ class Video(ClusterableModel, models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     tags = ClusterTaggableManager(through=VideoTag, blank=True)
+    thumbnail = models.ForeignKey(
+        Image, 
+        on_delete=models.SET_NULL, 
+        related_name='+', 
+        null=True, 
+        blank=True
+    )
 
+    panels = [
+        FieldPanel('url'),
+        FieldPanel('title'),
+        FieldPanel('description'),
+        FieldPanel('tags'),
+        FieldPanel('thumbnail'),  # Enables image selection in Wagtail admin
+    ]
     def __str__(self) -> str:
         return self.title
 
